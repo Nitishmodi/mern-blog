@@ -48,7 +48,7 @@ export default function Signup() {
     </Link>
    <br></br>
     <br></br>
-    <p className='text-sm mt:5'>Welcome! to the signup page for My Blog's website. You can sign up with your  email and password or with Google Account</p>
+    <p className='text-sm mt:5'>Welcome! to the signup page for My Blog's website. You can sign up with your email and password or with Google Account.</p>
         </div>
         <div className='flex-1'>
           <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
