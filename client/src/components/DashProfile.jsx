@@ -10,7 +10,7 @@ import { getDownloadURL } from 'firebase/storage';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 export default function DashProfile() {
-    const {currentUser} =useSelector(state=>state.user);
+    const {currentUser} =useSelector((state)=>state.user);
     const [imageFile, setImageFile]=useState(null);
     const [imageFileUrl,setImageFileUrl]=useState(null);
     const [imageFileUploadProgress,setImageFileUploadProgress] = useState(null);
@@ -77,7 +77,8 @@ export default function DashProfile() {
             }}
             />
             )}
-        <img src={imageFileUrl || currentUser.profilePicuture} alt="user" className={`rounded-full w-full h-full object-cover border-8 border-[lightgray] ${imageFileUploadProgress && imageFileUploadProgress<100 && 'opacity-60'} `} />
+        <img src={imageFileUrl || currentUser.profilePicture} alt="user" className={`rounded-full w-full h-full object-cover border-8 border-[lightgray] ${imageFileUploadProgress && imageFileUploadProgress<100 && 'opacity-60'} `} />
+
         </div>
         {imageFileUploadError && <Alert color='failure'>{imageFileUploadError}</Alert>}
         <TextInput type='text' id='username' placeholder='username' defaultValue={currentUser.username} />
