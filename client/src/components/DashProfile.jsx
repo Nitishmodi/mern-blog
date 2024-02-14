@@ -9,7 +9,7 @@ import { app } from '../firebase';
 import { getDownloadURL } from 'firebase/storage';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { updateStart,updateSuccess,updateFailure,deleteUserStart,deleteUserSuccess,deleteUserFailure } from '../redux/user/userSlice';
+import { updateStart,updateSuccess,updateFailure,deleteUserStart,deleteUserSuccess,deleteUserFailure,signoutSuccess } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
 import {HiOutlineExclamationCircle} from "react-icons/hi";
 export default function DashProfile() {
@@ -126,6 +126,21 @@ export default function DashProfile() {
        }catch(error){
          dispatch(deleteUserFailure(error.message));
        }
+   };
+   const handleSignout=async()=>{
+    try{
+       const res=await fetch('/api/user/signout',{
+        method:'POST',
+       });
+       const data= await res.json();
+       if(!res.ok){
+        console.log(data.message);
+       }else{
+         dispatch(signoutSuccess());
+       }
+    }catch(error){
+        console.log(error.message);
+    }
    }
   return (
     <div className='max-w-lg mx-auto p-3 w-full'>
@@ -161,7 +176,7 @@ export default function DashProfile() {
        </form>
        <div className='text-red-500 flex justify-between mt-5'>
         <Button color='failure' onClick={()=>setShowModal(true)} className='cursor-pointer'>Delete Account</Button>
-         <Button color='failure' className='cursor-pointer'>Sign Out</Button>
+         <Button color='failure' onClick={handleSignout} className='cursor-pointer'>Sign Out</Button>
        </div>
        {updateUserSuccess && (
         <Alert color='success' className='mt-5'>{updateUserSuccess}</Alert>
